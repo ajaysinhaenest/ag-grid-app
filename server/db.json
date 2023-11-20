@@ -1,0 +1,25 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "ajay",
+      "email": "ajaysinha.enest@gmail.com",
+      "phone": "9999999999",
+      "dob": "20/01/2000"
+    },
+    {
+      "id": "KU77uq3",
+      "name": "ajay Sinha",
+      "email": "uchiha.itachi@gmail.com",
+      "phone": "999999888888",
+      "dob": "01/08/2003"
+    },
+    {
+      "id": "sM0stWs",
+      "name": "ajay Sinha",
+      "email": "goku@gmail.com",
+      "phone": "9023569867",
+      "dob": "0104/2004"
+    }
+  ]
+}

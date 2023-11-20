@@ -7,17 +7,36 @@ interface TableProps {}
 
 const Table: React.FC<TableProps> = () => {
     const data = [
-        { name: 'Dan', phoneNumber: 9856758898, birthYear: 2000 },
-        { name: 'Mac', phoneNumber: 9856758898, birthYear: 2000 },
-        { name: 'David', phoneNumber: 9856758898, birthYear: 2000 },
-        { name: 'john', phoneNumber: 9856758898, birthYear: 2000 },
+        { name: 'Rahul', age: 19, phoneNumber: 9876543210, birthYear: 2001 },
+        { name: 'David', age: 17, phoneNumber: 9827654310, birthYear: 2003 },
+        { name: 'Dan', age: 25, phoneNumber: 9765438210, birthYear: 1995 },
     ]
 
-    const columnDefs: { headerName: string; field: string }[] = [
+    const columnDefs: {
+        headerName: string
+        field: string
+        checkboxSelection?: boolean
+        floatingFilter?: boolean
+        flex?: number
+        cellClass?: (p: any) => string
+    }[] = [
         { headerName: 'Name', field: 'name' },
-        { headerName: 'Phone Number', field: 'phoneNumber' },
+        {
+            headerName: 'Age',
+            field: 'age',
+            // cellStyle:(params)=>(params.value>18?{borderLeft:"4px green solid"}:{borderLeft:"4px red solid"})
+            cellClass: (params) =>
+                params.value > 18 ? 'moreThan18' : 'lessThan18',
+        },
         { headerName: 'Birth Year', field: 'birthYear' },
+        { headerName: 'Phone Number', field: 'phoneNumber' },
     ]
+
+    const defaultColDef = {
+        sortable: true,
+        editable: true,
+        filter: true,
+    }
 
     let gridApi: GridApi | null = null // Explicit type declaration and initialization
 
@@ -34,7 +53,7 @@ const Table: React.FC<TableProps> = () => {
     }
     return (
         <>
-            {/* <button>Export</button> */}
+            <button onClick={onExportClick}>Export</button>
             <div
                 className='ag-theme-alpine'
                 style={{ height: 400, width: '100%' }}
@@ -42,7 +61,7 @@ const Table: React.FC<TableProps> = () => {
                 <AgGridReact
                     rowData={data}
                     columnDefs={columnDefs}
-                    // defaultColDef={defaultColDef}
+                    defaultColDef={defaultColDef}
                     onGridReady={onGridReady}
                 />
             </div>
