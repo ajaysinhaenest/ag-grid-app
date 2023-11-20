@@ -3,7 +3,7 @@ import { AgGridReact } from 'ag-grid-react'
 import 'ag-grid-community/styles/ag-grid.css'
 import 'ag-grid-community/styles/ag-theme-alpine.css'
 import { GridApi, GridReadyEvent, ColumnApi } from 'ag-grid-community'
-import { Button } from '@mui/material'
+import { Button, Box } from '@mui/material'
 import FormDialog from './dialogBox/FormDialog'
 
 interface TableProps {}
@@ -50,15 +50,23 @@ const CurdOperations: React.FC<TableProps> = () => {
         {
             headerName: 'Actions',
             field: 'id',
-            cellRendererFramework: (params: any) => (
-                <div>
-                    <button onClick={() => handleUpdate(params.data)}>
+            cellRenderer: (params: any) => (
+                <Box display='flex' gap={2}>
+                    <Button
+                        variant='outlined'
+                        color='primary'
+                        onClick={() => handleUpdate(params.data)}
+                    >
                         Update
-                    </button>
-                    <button onClick={() => handleDelete(params.value)}>
+                    </Button>
+                    <Button
+                        variant='outlined'
+                        color='secondary'
+                        onClick={() => handleDelete(params.value)}
+                    >
                         Delete
-                    </button>
-                </div>
+                    </Button>
+                </Box>
             ),
         },
     ]
@@ -148,6 +156,12 @@ const CurdOperations: React.FC<TableProps> = () => {
         }
     }
 
+    const defaultColDef = {
+        sortable: true,
+        flex: 1,
+        filter: true,
+        floatingFilter: true,
+    }
     return (
         <>
             <h1>React-App</h1>
@@ -158,7 +172,7 @@ const CurdOperations: React.FC<TableProps> = () => {
                     onGridReady={onGridReady}
                     rowData={tableData}
                     columnDefs={columnDefs}
-                    defaultColDef={{ flex: 1 }}
+                    defaultColDef={defaultColDef}
                 />
             </div>
             <FormDialog
